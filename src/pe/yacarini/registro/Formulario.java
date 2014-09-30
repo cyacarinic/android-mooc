@@ -12,6 +12,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
+import extras.Extras;
+
 public class Formulario extends Activity{
 	
 	private FormularioAyuda formularioAyuda;
@@ -22,7 +24,7 @@ public class Formulario extends Activity{
 		
   		// Recibimos el alumno pasador por los extras del Intent
 		Intent intent = getIntent();
-  		final Alumno alumnoRecibido = (Alumno)intent.getSerializableExtra("alumnoSeleccionado");  		
+  		final Alumno alumnoRecibido = (Alumno)intent.getSerializableExtra(Extras.ALUMNO_SELECCIONADO);  		
   		Toast.makeText(this, "Alumno: "+alumnoRecibido, Toast.LENGTH_LONG).show();
 		
 		formularioAyuda = new FormularioAyuda(this);		

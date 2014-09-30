@@ -101,8 +101,8 @@ public class AlumnoDAO extends SQLiteOpenHelper{// Se extiende SQLiteOpenHelper
 		values.put("nota",alumno.getNota());
 		values.put("foto", alumno.getFoto());
 		
-		String [] args = {alumno.getId().toString()};		
-		getWritableDatabase().update("Alumnos", values, "id=?", args);
+		String [] id = {alumno.getId().toString()};		
+		getWritableDatabase().update("Alumnos", values, "id=?", id);
 	}
 
 }

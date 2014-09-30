@@ -6,6 +6,7 @@ import pe.yacarini.registro.dao.AlumnoDAO;
 import pe.yacarini.registro.modelo.Alumno;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -21,16 +22,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import extras.Extras;
+
 /*
  * 
- * Se adiciona el menu contextual para el ListView Lista
- * Se adicionan los metodos eliminar
- * Se declara la variable global alumnoSeleccionado 
- * Se corrige el tipo del ID en el DAO
- * Se implementa el metodo CARGARLISTA que contiene lo que llevaba el OnResume
- * Al dar clic en un registro se lleva a formulario para su edicion
- * Serializamos la clase Alumno para ser pasada como Extra del Intent
- * Se implementa el método actualizar
+ * Se adicionan los metodos llamar y visitar Site
+ * Uso de Intents Implicitos
  * 
  * 
  * */
@@ -50,18 +47,14 @@ public class ListaAlumnos extends Activity {
         registerForContextMenu(lista); // Se relaciona el menu contextual con el LisvView Lista
           
         lista.setOnItemClickListener(new OnItemClickListener() {
-
 			@Override
 			public void onItemClick(AdapterView<?> adapter, View view, int position,
 					long id) {
-				/*Toast.makeText(ListaAlumnos.this,
-						"Click en la posicion "+(position+1),
-						Toast.LENGTH_SHORT).show();	*/
 				
 				alumnoSeleccionado = (Alumno)adapter.getItemAtPosition(position);
 				// Creamos el salto de ListaAlumnos a Formulario
 				Intent irParaFormulario = new Intent(ListaAlumnos.this, Formulario.class);
-				irParaFormulario.putExtra("alumnoSeleccionado", alumnoSeleccionado);
+				irParaFormulario.putExtra(Extras.ALUMNO_SELECCIONADO, alumnoSeleccionado);
 				
 				startActivity(irParaFormulario); //Iniciamos la actividad
 			}
@@ -91,9 +84,40 @@ public class ListaAlumnos extends Activity {
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
 		
-		menu.add("Matricular");
+		MenuItem menuLlamar = menu.add("Llamar");
+		menuLlamar.setOnMenuItemClickListener(new OnMenuItemClickListener() {			
+			@Override
+			public boolean onMenuItemClick(MenuItem arg0) {
+				// Utilizamos el intent Implicito 'Intent.ACTION_CALL'
+				Intent irParaTelefono = new Intent (Intent.ACTION_CALL);
+				Uri llamar_a = Uri.parse("tel:"+alumnoSeleccionado.getTelefono());
+				irParaTelefono.setData(llamar_a);
+
+				startActivity(irParaTelefono);
+
+				return false;
+			}
+
+		});
+		
 		menu.add("Enviar un SMS");
-		menu.add("Visitar Sitio Web");
+
+		MenuItem menuSite = menu.add("Visitar Sitio Web");
+		menuSite.setOnMenuItemClickListener(new OnMenuItemClickListener() {			
+			@Override
+			public boolean onMenuItemClick(MenuItem arg0) {
+				// Utilizamos el intent Implicito 'Intent.ACTION_VIEW'
+				Intent irParaSite = new Intent (Intent.ACTION_VIEW);
+				Uri localSite = Uri.parse("http://"+alumnoSeleccionado.getSite());
+				irParaSite.setData(localSite);
+
+				startActivity(irParaSite);
+
+				return false;
+			}
+
+		});
+
 		MenuItem menuEliminar = menu.add("Eliminar"); // se crea una variable para poder manejar eventos
 		menuEliminar.setOnMenuItemClickListener(new OnMenuItemClickListener() {			
 			@Override

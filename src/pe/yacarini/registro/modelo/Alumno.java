@@ -62,7 +62,5 @@ public class Alumno implements Serializable { // Serializamos para pasar como ex
 		return getNombre(); // sino bota mucha vaina
 	}
 	
-	
-	
 
 }
