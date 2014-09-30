@@ -1,7 +1,11 @@
 package pe.yacarini.registro;
 
 import pe.yacarini.registro.modelo.Alumno;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 
 public class FormularioAyuda {
@@ -11,6 +15,9 @@ public class FormularioAyuda {
 	private EditText editTelefono;
 	private EditText editDireccion;
 	private RatingBar ratingNota;
+	// instanciamos referencias para la foto y el alumno en cuestion
+	private ImageView foto;
+	private Alumno alumno;
 
 	public FormularioAyuda(Formulario formu){
 		// Ctrl + 1 -> Convertir variable local a campo
@@ -19,6 +26,9 @@ public class FormularioAyuda {
   		editTelefono = (EditText) formu.findViewById(R.id.telefono);
   		editDireccion = (EditText) formu.findViewById(R.id.direccion);
   		ratingNota = (RatingBar) formu.findViewById(R.id.nota);
+  		//iniciamos las instancias del alumno y su foto
+  		foto = (ImageView)formu.findViewById(R.id.foto);
+  		alumno = new Alumno();
 	}
 
 	public Alumno guardarFormularioAlumno() {
@@ -42,5 +52,22 @@ public class FormularioAyuda {
 		ratingNota.setRating(alumnoRecibido.getNota().floatValue());
 		
 	}
+	
+	public ImageView getFoto(){
+		return foto;
+	}
+
+	public void cargarImagen(String rutaArchivo) {
+		// TODO Auto-generated method stub
+		// establecemos la ruta al objeto alumno
+		alumno.setFoto(rutaArchivo);
+		//creamos la imagen con el tamaño real
+		Bitmap imagen = BitmapFactory.decodeFile(rutaArchivo);
+		// escalamos la imagen para mostrarla en espacio de 100x100
+		Bitmap imagenReducida = Bitmap.createScaledBitmap(imagen, 100, 100, true);
+		
+		foto.setImageBitmap(imagenReducida);
+	}
+
 
 }
