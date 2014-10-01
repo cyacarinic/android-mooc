@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -144,9 +145,16 @@ public class ListaAlumnos extends Activity {
 		AlumnoDAO dao = new AlumnoDAO(this);
 		List<Alumno> alumnos = dao.getLista();
 		dao.close();
-		int layout = android.R.layout.simple_list_item_1;
+		/* Ya no usaremos el simple list sino un layou personalizado 
+		int layout = android.R.layout.simple_list_item_1;*/
+		int layout = R.layout.linea_lista;
+		/* Añadiremos nuestro propio Layout e Inflater
+		 * para que todo lo haga el adaptador
 		ArrayAdapter<Alumno> adaptador = 
-				new ArrayAdapter<Alumno>(this, layout, alumnos);
+				new ArrayAdapter<Alumno>(this, layout, alumnos);*/
+		ListaAlumnoAdapter adaptador = new
+				ListaAlumnoAdapter(alumnos, this);
+		//LayoutInflater inflater = getLayoutInflater();
 		
 		
 		lista.setAdapter(adaptador);

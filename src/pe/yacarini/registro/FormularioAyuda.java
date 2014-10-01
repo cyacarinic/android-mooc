@@ -33,7 +33,7 @@ public class FormularioAyuda {
 
 	public Alumno guardarFormularioAlumno() {
 		// TODO Auto-generated method stub
-		Alumno alumno = new Alumno();
+		// no crear nuevo alumno xq se pierden datos
   		alumno.setNombre(editNombre.getText().toString());
   		alumno.setSite(editSite.getText().toString());
   		alumno.setTelefono(editTelefono.getText().toString());
@@ -64,7 +64,7 @@ public class FormularioAyuda {
 		//creamos la imagen con el tamaño real
 		Bitmap imagen = BitmapFactory.decodeFile(rutaArchivo);
 		// escalamos la imagen para mostrarla en espacio de 100x100
-		Bitmap imagenReducida = Bitmap.createScaledBitmap(imagen, 100, 100, true);
+		Bitmap imagenReducida = Bitmap.createScaledBitmap(imagen, 50, 50, true);
 		
 		foto.setImageBitmap(imagenReducida);
 	}

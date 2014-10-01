@@ -1077,7 +1077,14 @@ containing a value of this type.
         public static final int abc_textfield_searchview_holo_light=0x7f020054;
         public static final int abc_textfield_searchview_right_holo_dark=0x7f020055;
         public static final int abc_textfield_searchview_right_holo_light=0x7f020056;
-        public static final int ic_launcher=0x7f020057;
+        public static final int ic_enviar=0x7f020057;
+        public static final int ic_launcher=0x7f020058;
+        public static final int ic_mapa=0x7f020059;
+        public static final int ic_no_imagen=0x7f02005a;
+        public static final int ic_nuevo=0x7f02005b;
+        public static final int ic_opciones=0x7f02005c;
+        public static final int ic_preferencias=0x7f02005d;
+        public static final int ic_recibir=0x7f02005e;
     }
     public static final class id {
         public static final int action_bar=0x7f05001c;
@@ -1091,7 +1098,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f050049;
+        public static final int action_settings=0x7f05004a;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
@@ -1104,9 +1111,10 @@ containing a value of this type.
         public static final int dropdown=0x7f05000f;
         public static final int edit_query=0x7f050030;
         public static final int end=0x7f050013;
-        public static final int enviar_alumnos=0x7f050046;
+        public static final int enviar_alumnos=0x7f050047;
         public static final int expand_activities_button=0x7f050026;
         public static final int expanded_menu=0x7f05002c;
+        public static final int fondo=0x7f050043;
         public static final int foto=0x7f05003c;
         public static final int grabar=0x7f050042;
         public static final int home=0x7f050014;
@@ -1116,20 +1124,20 @@ containing a value of this type.
         public static final int image=0x7f050027;
         public static final int listMode=0x7f050001;
         public static final int list_item=0x7f050029;
-        public static final int lista=0x7f050043;
-        public static final int mapa=0x7f050045;
+        public static final int lista=0x7f050044;
+        public static final int mapa=0x7f050046;
         public static final int middle=0x7f050012;
         public static final int never=0x7f050009;
         public static final int nombre=0x7f05003d;
         public static final int none=0x7f050010;
         public static final int normal=0x7f050000;
         public static final int nota=0x7f050041;
-        public static final int nuevo=0x7f050044;
-        public static final int preferencias=0x7f050048;
+        public static final int nuevo=0x7f050045;
+        public static final int preferencias=0x7f050049;
         public static final int progress_circular=0x7f050018;
         public static final int progress_horizontal=0x7f050019;
         public static final int radio=0x7f05002f;
-        public static final int recibir_pruebas=0x7f050047;
+        public static final int recibir_pruebas=0x7f050048;
         public static final int search_badge=0x7f050032;
         public static final int search_bar=0x7f050031;
         public static final int search_button=0x7f050033;
@@ -1206,8 +1214,9 @@ containing a value of this type.
         public static final int abc_search_view=0x7f030016;
         public static final int abc_simple_decor=0x7f030017;
         public static final int formulario=0x7f030018;
-        public static final int lista_de_alumnos=0x7f030019;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001a;
+        public static final int linea_lista=0x7f030019;
+        public static final int lista_de_alumnos=0x7f03001a;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001b;
     }
     public static final class menu {
         public static final int lista_alumnos=0x7f0c0000;
