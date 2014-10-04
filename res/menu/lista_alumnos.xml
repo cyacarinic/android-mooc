@@ -1,0 +1,39 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="pe.yacarini.registro.ListaAlumnos" >
+     
+    <item
+        android:id="@+id/nuevo"
+        android:icon="@drawable/abc_ic_go"
+        android:showAsAction="always"
+        android:title="Nuevo"/>
+    <item
+        android:id="@+id/mapa"
+        android:icon="@drawable/abc_ic_search"
+        android:showAsAction="always"
+        android:title="Mapa"/>
+    <item
+        android:icon="@drawable/abc_ic_menu_moreoverflow_normal_holo_dark"
+        android:showAsAction="always"
+        android:title="Opciones">
+        <menu>
+            <item
+                android:id="@+id/enviar_alumnos"
+                android:icon="@drawable/abc_ic_menu_share_holo_dark"
+                android:showAsAction="always"
+                android:title="Sincronizar"/>
+            <item
+                android:id="@+id/recibir_pruebas"
+                android:icon="@drawable/abc_spinner_ab_holo_dark"
+                android:showAsAction="always"
+                android:title="Bajar Pruebas"/>
+            <item
+                android:id="@+id/preferencias"
+                android:icon="@drawable/abc_ic_clear"
+                android:showAsAction="always"
+                android:title="Preferencias"/>
+        </menu>
+    </item>
+ 
+</menu>
