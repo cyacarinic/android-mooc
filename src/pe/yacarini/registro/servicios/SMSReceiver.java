@@ -30,6 +30,8 @@ public class SMSReceiver extends BroadcastReceiver {
 		if (esAlumno) {
 			MediaPlayer player = MediaPlayer.create(context, R.raw.main);
 			player.start();
+			Toast.makeText(context, "Llamandooooooooooo...!!! "+telefono, 
+					Toast.LENGTH_LONG).show();
 		}
 	}
 
