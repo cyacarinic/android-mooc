@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.Toast;
 
 public class FormularioAyuda {
 	
@@ -50,7 +51,9 @@ public class FormularioAyuda {
 		editTelefono.setText(alumnoRecibido.getTelefono());
 		editDireccion.setText(alumnoRecibido.getDireccion());
 		ratingNota.setRating(alumnoRecibido.getNota().floatValue());
-		
+		if(alumnoRecibido.getFoto()!=null){
+			cargarImagen(alumnoRecibido.getFoto().toString());
+		}
 	}
 	
 	public ImageView getFoto(){

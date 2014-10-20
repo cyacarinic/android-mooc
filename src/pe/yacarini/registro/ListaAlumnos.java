@@ -9,20 +9,17 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
-import android.view.LayoutInflater;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import extras.Extras;
 
 /*
@@ -183,6 +180,33 @@ public class ListaAlumnos extends Activity {
 		case R.id.nuevo:
 			Intent irFormulario = new Intent(this, Formulario.class);
 			startActivity(irFormulario);
+			break;
+			
+		case R.id.enviar_alumnos:
+			
+			/* Genera error si llamamos la tarea de un servicio desde el mismo hilo
+			 * de la interfaz de usuario (Network on main trheat exception), se sobre carga.
+			 * --> Solucion monse: crear un emulador anticucho
+			 */
+			
+			String urlServidor = 
+				"http://andrpod-mobile.joedayz.cludbees.net/alumnos";
+						
+			//cargamos los alumnos en "dao"
+			AlumnoDAO dao = new AlumnoDAO(this);
+			List<Alumno> alumnos = dao.getLista();
+			dao.close();
+			
+			//implementaremos la clase AlumnoConverter con el metodo toJSON
+			//que reciba por parámetro la lista de alumnos
+			String datosJSON = new AlumnoConverter().toJSON(alumnos);
+			
+			// Recibiremos la respuesta del cliente de la clase WebClient
+			WebClient cliente = new WebClient(urlServidor);
+			String respuestaJSON = cliente.post(datosJSON); //post de los datos JSON
+			
+			Toast.makeText(this, respuestaJSON, Toast.LENGTH_LONG).show();
+			
 			break;
 
 		default:
