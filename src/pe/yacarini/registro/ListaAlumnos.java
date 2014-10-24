@@ -6,9 +6,12 @@ import pe.yacarini.registro.dao.AlumnoDAO;
 import pe.yacarini.registro.modelo.Alumno;
 import pe.yacarini.registro.task.EnviaAlumnosTask;
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.telephony.PhoneNumberUtils;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -41,8 +44,6 @@ public class ListaAlumnos extends Activity {
     protected void onCreate(Bundle savedInstanceState) {		
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lista_de_alumnos);
-        
-        /* ---------------------------> */ Log.i(" Se inicia la app : ", " OK...!!");
         
         lista = (ListView) findViewById(R.id.lista);
         
@@ -102,7 +103,30 @@ public class ListaAlumnos extends Activity {
 
 		});
 		
-		menu.add("Enviar un SMS");
+		MenuItem menuSMS = menu.add("Enviar un SMS");
+		menuSMS.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				Intent irParaSMS = new Intent(Intent.ACTION_VIEW);
+				Uri dataSMS = Uri.parse("sms:"+alumnoSeleccionado.getTelefono());
+				irParaSMS.setData(dataSMS);
+				irParaSMS.putExtra("sms_body", "Estimado "+alumnoSeleccionado+", su nota " +
+						"es: "+alumnoSeleccionado.getNota());
+				startActivity(irParaSMS);
+				/*
+				 * TODO
+				SmsManager smsManager	=	SmsManager.getDefault();	
+				PendingIntent	sentIntent	=	PendingIntent.getActivity(ListaAlumnos.this, 0, null, 0);	
+				if(PhoneNumberUtils.isWellFormedSmsAddress(alumnoSeleccionado.getTelefono()))	{	
+				  smsManager.sendTextMessage(alumnoSeleccionado.getTelefono(), null,	"Su nota es"+alumnoSeleccionado.getNota(), sentIntent, null);	
+				  Toast.makeText(ListaAlumnos.this,"SMS enviado con exito!!!",	Toast.LENGTH_LONG).show();
+				}else {	
+				  Toast.makeText(ListaAlumnos.this, "Fallo	el SMS -­‐ intente nuevamente!!!", Toast.LENGTH_LONG).show();	
+				}*/
+				
+				return false;
+			}
+		});
 
 		MenuItem menuSite = menu.add("Visitar Sitio Web");
 		menuSite.setOnMenuItemClickListener(new OnMenuItemClickListener() {			
@@ -145,13 +169,36 @@ public class ListaAlumnos extends Activity {
 				try{
 					startActivity(irParaMapa);
 				}catch(Exception e){
-					Toast.makeText(ListaAlumnos.this, e.getMessage(), Toast.LENGTH_LONG).show();
+					Toast.makeText(ListaAlumnos.this, "<{Warning: Verifique tener instalado un gestor de mapas}/>", Toast.LENGTH_LONG).show();
 				}
 				
 				return false;
 			}
 		});
-		menu.add("Enviar un mail");
+		MenuItem menuEmail = menu.add("Enviar un mail");
+		menuEmail.setOnMenuItemClickListener(new OnMenuItemClickListener() {			
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				
+				Intent irParaMail = new Intent(Intent.ACTION_SEND);
+				irParaMail.setType("message/rfc882");
+				irParaMail.putExtra(Intent.EXTRA_EMAIL,
+						new String[]{"informes@joedayz.pe"});
+				irParaMail.putExtra(Intent.EXTRA_SUBJECT, 
+						"Comentarios sobre el curso de Android");
+				irParaMail.putExtra(Intent.EXTRA_TEXT, 
+						"Bale Berga la Bida y el Curso X)");
+				
+				try{
+					startActivity(irParaMail);
+				}catch(Exception e){
+					Toast.makeText(ListaAlumnos.this, "<{Warning: Verifique tener instalado un gestor de e-mail}/>",
+							Toast.LENGTH_LONG).show();
+				}
+				
+				return false;
+			}
+		});
 		
 		
 		super.onCreateContextMenu(menu, v, menuInfo);

@@ -33,8 +33,8 @@ public class WebClient {
 			
 			return respuestaEnJson;
 		}catch(Exception e){
-			//e.printStackTrace();
-			throw new RuntimeException(e);
+			//throw new RuntimeException(e);
+			return "<Warning : Error de conexión con el servidor/>";
 		}
 	}
 
