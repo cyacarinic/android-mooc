@@ -1,0 +1,5 @@
+ <resources>
+ 	<color name="borde_imagen">#BABABA</color>
+    <color name="linea_par">#BDBDBD</color>	  <!-- Oscuro -->
+    <color name="linea_impar">#D8D8D8</color> <!-- Claro -->
+</resources>

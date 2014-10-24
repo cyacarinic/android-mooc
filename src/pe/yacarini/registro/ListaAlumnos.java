@@ -4,10 +4,12 @@ import java.util.List;
 
 import pe.yacarini.registro.dao.AlumnoDAO;
 import pe.yacarini.registro.modelo.Alumno;
+import pe.yacarini.registro.task.EnviaAlumnosTask;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -36,9 +38,11 @@ public class ListaAlumnos extends Activity {
 	private Alumno alumnoSeleccionado;
 
 	@Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {		
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lista_de_alumnos);
+        
+        /* ---------------------------> */ Log.i(" Se inicia la app : ", " OK...!!");
         
         lista = (ListView) findViewById(R.id.lista);
         
@@ -130,7 +134,23 @@ public class ListaAlumnos extends Activity {
 			}
 
 		});
-		menu.add("Ver en el mapa");
+		MenuItem verEnMapa = menu.add("Ver en el mapa");
+		verEnMapa.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				Intent irParaMapa = new Intent(Intent.ACTION_VIEW);
+				Uri dataMapa = Uri.parse("geo:0,0?z=14&q="+alumnoSeleccionado.getDireccion());
+				irParaMapa.setData(	dataMapa );
+				
+				try{
+					startActivity(irParaMapa);
+				}catch(Exception e){
+					Toast.makeText(ListaAlumnos.this, e.getMessage(), Toast.LENGTH_LONG).show();
+				}
+				
+				return false;
+			}
+		});
 		menu.add("Enviar un mail");
 		
 		
@@ -144,8 +164,8 @@ public class ListaAlumnos extends Activity {
 		dao.close();
 		/* Ya no usaremos el simple list sino un layou personalizado 
 		int layout = android.R.layout.simple_list_item_1;*/
-		int layout = R.layout.linea_lista;
-		/* Añadiremos nuestro propio Layout e Inflater
+		/* int layout = R.layout.linea_lista;
+		 * Añadiremos nuestro propio Layout e Inflater
 		 * para que todo lo haga el adaptador
 		ArrayAdapter<Alumno> adaptador = 
 				new ArrayAdapter<Alumno>(this, layout, alumnos);*/
@@ -184,29 +204,60 @@ public class ListaAlumnos extends Activity {
 			
 		case R.id.enviar_alumnos:
 			
+			EnviaAlumnosTask task = new EnviaAlumnosTask(this);
+			task.execute();
+			
 			/* Genera error si llamamos la tarea de un servicio desde el mismo hilo
 			 * de la interfaz de usuario (Network on main trheat exception), se sobre carga.
 			 * --> Solucion monse: crear un emulador anticucho
+			 * --> solucion normal, asigarlo a otro Thread
 			 */
-			
-			String urlServidor = 
-				"http://andrpod-mobile.joedayz.cludbees.net/alumnos";
-						
-			//cargamos los alumnos en "dao"
-			AlumnoDAO dao = new AlumnoDAO(this);
-			List<Alumno> alumnos = dao.getLista();
-			dao.close();
-			
-			//implementaremos la clase AlumnoConverter con el metodo toJSON
-			//que reciba por parámetro la lista de alumnos
-			String datosJSON = new AlumnoConverter().toJSON(alumnos);
-			
-			// Recibiremos la respuesta del cliente de la clase WebClient
-			WebClient cliente = new WebClient(urlServidor);
-			String respuestaJSON = cliente.post(datosJSON); //post de los datos JSON
-			
-			Toast.makeText(this, respuestaJSON, Toast.LENGTH_LONG).show();
-			
+			/*
+			 * Simplificamos implementando EnviarAlumnosTask
+			 * 
+			Thread tareaPesada = new Thread(){
+				@Override
+				public void run() {
+					
+					// ----> Nos llevamos la tarea pesada a EnviaAlumnoTask
+					// Insertamos la tarea pesada
+					String urlServidor = 
+							"http://andrpod-mobile.joedayz.cludbees.net/alumnos";								
+					//cargamos los alumnos en "dao"
+					AlumnoDAO dao = new AlumnoDAO(ListaAlumnos.this); //context != this -> ListaAlumnos.this
+					List<Alumno> alumnos = dao.getLista();
+					dao.close();
+					
+					//implementaremos la clase AlumnoConverter con el metodo toJSON
+					//que reciba por parámetro la lista de alumnos
+					String datosJSON = new AlumnoConverter().toJSON(alumnos);
+					
+					// Recibiremos la respuesta del cliente de la clase WebClient
+					WebClient cliente = new WebClient(urlServidor);
+					final String respuestaJSON = cliente.post(datosJSON); //post de los datos JSON
+					
+					
+					// no se puede hacer un toast en el main desde un thread distinto					
+					//Toast.makeText(ListaAlumnos.this, respuestaJSON, Toast.LENGTH_LONG).show();
+					
+					
+					// --> Se incluye en el onPostExecute de EnviaAlumnoTask
+					// Entonces, por consola con LOG
+					Log.i("retorno de la llamada: ", respuestaJSON);
+					
+					ListaAlumnos.this.runOnUiThread(new Runnable() {						
+						@Override
+						public void run() {
+							Toast.makeText(ListaAlumnos.this, 
+									respuestaJSON, Toast.LENGTH_LONG)
+									.show();
+						}
+					});
+				}
+			};
+			tareaPesada.start(); // delegamos la tarea al Thread "tareaPesada"
+			*
+			*/
 			break;
 
 		default:

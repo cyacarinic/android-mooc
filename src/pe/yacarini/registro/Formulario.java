@@ -32,12 +32,14 @@ public class Formulario extends Activity{
   		// Recibimos el alumno pasador por los extras del Intent
 		Intent intent = getIntent();
   		final Alumno alumnoRecibido = (Alumno)intent.getSerializableExtra(Extras.ALUMNO_SELECCIONADO);  		
-  		Toast.makeText(this, "Alumno: "+alumnoRecibido, Toast.LENGTH_LONG).show();
+  		// --> mas abajo, si es diferente de null
+  		//Toast.makeText(this, "Alumno: "+alumnoRecibido, Toast.LENGTH_LONG).show();
 		
 		formularioAyuda = new FormularioAyuda(this);		
 		Button boton = (Button) findViewById(R.id.grabar);
 		
 		if(alumnoRecibido!=null){	// Si se recibe algun alumno por parametro
+			Toast.makeText(this, "Alumno: "+alumnoRecibido, Toast.LENGTH_LONG).show();
 			boton.setText("Actualizar");
 			formularioAyuda.colocarAlumnoEnFormulario(alumnoRecibido);	// llena los datos en formulario
 		}

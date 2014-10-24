@@ -47,7 +47,13 @@ public class ListaAlumnoAdapter extends BaseAdapter {
 		
 		// Obtengo la linea para buscar su info
 		LayoutInflater inflater = activity.getLayoutInflater();
-		View linea = inflater.inflate(R.layout.linea_lista, null);
+		//View linea = inflater.inflate(R.layout.linea_lista, null); //--> View Normal
+		View linea = inflater.inflate(R.layout.item, null); // --> View efecto Zebra
+		
+		if(position % 2 == 0){
+			linea.setBackgroundColor(activity.getResources(). 
+					getColor(R.color.linea_par));
+		}
 		
 		TextView nombre = (TextView)linea.findViewById(R.id.nombre);
 		nombre.setText(alumno.getNombre());
@@ -57,7 +63,7 @@ public class ListaAlumnoAdapter extends BaseAdapter {
 		if(alumno.getFoto() != null){
 			Bitmap fotoAlumno = BitmapFactory.decodeFile(alumno.getFoto());
 			Bitmap fotoReducida = Bitmap.createScaledBitmap(fotoAlumno,
-					50, 50, true);
+					54, 54, true);
 			foto.setImageBitmap(fotoReducida);
 		}else{
 			Drawable sinFoto = activity.getResources().

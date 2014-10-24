@@ -2,3 +2,11 @@ Claudio Yacarini Chiroque
 Facultad de Ing de Sistemas - UNMSM
 cyacarinic@gmail.com
 949194949
+
+		<activity android:name="">
+		    <intent-filter>
+		        <action android:name="android.intent.action.VIEW" />
+		        <data android:scheme="geo" />
+		        <category android:name="android.intent.category.DEFAULT" />
+		    </intent-filter>
+		</activity>
