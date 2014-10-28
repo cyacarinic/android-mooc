@@ -23,32 +23,23 @@ public class EnviaAlumnosTask extends AsyncTask<Integer, Double, String>{
 	
 	@Override
 	protected String doInBackground(Integer... params) {
-		// acá se realiza el trabajo pesado
+		//trabajo pesado en background
 		
-		String respuestaJSON;
+		String urlServidor = "http://api.joedayz.pe/android-mooc/api/v1.0/notas";
+							//"http://192.168.1.33:5000/todo/api/v1.0/notas";
 		
-		try{
-			String urlServidor = 
-					"http://andrpod-mobile.joedayz.cludbees.net/alumnos";								
-			//cargamos los alumnos en "dao"
-			AlumnoDAO dao = new AlumnoDAO(contexto); //context != this -> ListaAlumnos.this
-			List<Alumno> alumnos = dao.getLista();
-			dao.close();
-			
-			//implementaremos la clase AlumnoConverter con el metodo toJSON
-			//que reciba por parámetro la lista de alumnos
-			String datosJSON = new AlumnoConverter().toJSON(alumnos);
-			
-			// Recibiremos la respuesta del cliente de la clase WebClient
-			WebClient cliente = new WebClient(urlServidor);
-			respuestaJSON = cliente.post(datosJSON); //post de los datos JSON
-		}catch(Exception e){
-			respuestaJSON = e.getMessage();
-			Log.i("--> Error : ", respuestaJSON);
-		}
+		AlumnoDAO dao = new AlumnoDAO(contexto);
+		List<Alumno> alumnos = dao.getLista();
+		dao.close();
 		
+		String datosJSON = new AlumnoConverter().toJSON(alumnos);
+		
+		WebClient client = new WebClient(urlServidor);
+		String respuestaJSON = client.post(datosJSON);
+
 		return respuestaJSON;
 	}
+	
 	
 	@Override
 	protected void onPreExecute() {

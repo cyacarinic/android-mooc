@@ -1103,20 +1103,23 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f060016;
         public static final int action_menu_presenter=0x7f060017;
         public static final int action_mode_close_button=0x7f060024;
-        public static final int action_settings=0x7f06004a;
+        public static final int action_settings=0x7f060051;
         public static final int activity_chooser_view_content=0x7f060025;
         public static final int always=0x7f06000b;
         public static final int beginning=0x7f060011;
         public static final int checkbox=0x7f06002d;
         public static final int collapseActionView=0x7f06000d;
         public static final int default_activity_button=0x7f060028;
+        public static final int detalle_prueba_fecha=0x7f060049;
+        public static final int detalle_prueba_materia=0x7f060048;
+        public static final int detalle_prueba_topicos=0x7f06004a;
         public static final int dialog=0x7f06000e;
         public static final int direccion=0x7f060040;
         public static final int disableHome=0x7f060008;
         public static final int dropdown=0x7f06000f;
         public static final int edit_query=0x7f060030;
         public static final int end=0x7f060013;
-        public static final int enviar_alumnos=0x7f060047;
+        public static final int enviar_alumnos=0x7f06004e;
         public static final int expand_activities_button=0x7f060026;
         public static final int expanded_menu=0x7f06002c;
         public static final int fondo=0x7f060043;
@@ -1130,19 +1133,22 @@ containing a value of this type.
         public static final int listMode=0x7f060001;
         public static final int list_item=0x7f060029;
         public static final int lista=0x7f060044;
-        public static final int mapa=0x7f060046;
+        public static final int mapa=0x7f06004d;
         public static final int middle=0x7f060012;
         public static final int never=0x7f060009;
         public static final int nombre=0x7f06003d;
         public static final int none=0x7f060010;
         public static final int normal=0x7f060000;
         public static final int nota=0x7f060041;
-        public static final int nuevo=0x7f060045;
-        public static final int preferencias=0x7f060049;
+        public static final int nuevo=0x7f06004c;
+        public static final int preferencias=0x7f060050;
         public static final int progress_circular=0x7f060018;
         public static final int progress_horizontal=0x7f060019;
+        public static final int pruebas=0x7f06004b;
+        public static final int pruebas_detalle=0x7f060047;
+        public static final int pruebas_lista=0x7f060046;
         public static final int radio=0x7f06002f;
-        public static final int recibir_pruebas=0x7f060048;
+        public static final int recibir_pruebas=0x7f06004f;
         public static final int search_badge=0x7f060032;
         public static final int search_bar=0x7f060031;
         public static final int search_button=0x7f060033;
@@ -1164,6 +1170,7 @@ containing a value of this type.
         public static final int telefono=0x7f06003f;
         public static final int title=0x7f06002b;
         public static final int top_action_bar=0x7f060020;
+        public static final int unico=0x7f060045;
         public static final int up=0x7f060021;
         public static final int useLogo=0x7f060003;
         public static final int withText=0x7f06000c;
@@ -1221,8 +1228,12 @@ containing a value of this type.
         public static final int formulario=0x7f030018;
         public static final int item=0x7f030019;
         public static final int linea_lista=0x7f03001a;
-        public static final int lista_de_alumnos=0x7f03001b;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001c;
+        public static final int linea_listade=0x7f03001b;
+        public static final int lista_de_alumnos=0x7f03001c;
+        public static final int pruebas=0x7f03001d;
+        public static final int pruebas_detalle=0x7f03001e;
+        public static final int pruebas_lista=0x7f03001f;
+        public static final int support_simple_spinner_dropdown_item=0x7f030020;
     }
     public static final class menu {
         public static final int lista_alumnos=0x7f0d0000;
@@ -1274,6 +1285,7 @@ containing a value of this type.
         public static final int abc_shareactionprovider_share_with_application=0x7f0b000b;
         public static final int action_settings=0x7f0b000f;
         public static final int app_name=0x7f0b000d;
+        public static final int foto=0x7f0b0011;
         public static final int grabar=0x7f0b0010;
         public static final int hello_world=0x7f0b000e;
     }

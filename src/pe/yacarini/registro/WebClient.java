@@ -35,6 +35,7 @@ public class WebClient {
 		}catch(Exception e){
 			//throw new RuntimeException(e);
 			return "<Warning : Error de conexión con el servidor/>";
+			
 		}
 	}
 

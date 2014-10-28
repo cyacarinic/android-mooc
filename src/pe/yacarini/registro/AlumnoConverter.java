@@ -15,6 +15,11 @@ public class AlumnoConverter {
 			{"nombre":"Claudio","nota":17.0},
 			{"nombre":"Mili","nota":20.0}
 		 ]}
+		 js.key("id").value(alumno.getId());
+				js.key("direccion").value(alumno.getDireccion());
+				js.key("site").value(alumno.getSite());
+				js.key("telefono").value(alumno.getTelefono());
+				
 		*/
 		try{
 			//try catch para controlar excepciones (seccion checkeada)

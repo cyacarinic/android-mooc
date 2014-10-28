@@ -14,6 +14,11 @@
         android:name="android.permission.INTERNET"/>
     <uses-permission
         android:name="android.permission.RECEIVE_SMS"/>
+    
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -32,8 +37,10 @@
         </activity>
         
         <activity 
-            android:name="pe.yacarini.registro.Formulario">
-			
+            android:name="pe.yacarini.registro.Formulario">			
+        </activity>
+        <activity 
+            android:name="pe.yacarini.registro.PruebasActivity">			
         </activity>
         
         <receiver android:name="pe.yacarini.registro.servicios.SMSReceiver">

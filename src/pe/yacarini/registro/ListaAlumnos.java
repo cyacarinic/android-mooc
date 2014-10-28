@@ -244,71 +244,77 @@ public class ListaAlumnos extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-		case R.id.nuevo:
-			Intent irFormulario = new Intent(this, Formulario.class);
-			startActivity(irFormulario);
-			break;
-			
-		case R.id.enviar_alumnos:
-			
-			EnviaAlumnosTask task = new EnviaAlumnosTask(this);
-			task.execute();
-			
-			/* Genera error si llamamos la tarea de un servicio desde el mismo hilo
-			 * de la interfaz de usuario (Network on main trheat exception), se sobre carga.
-			 * --> Solucion monse: crear un emulador anticucho
-			 * --> solucion normal, asigarlo a otro Thread
-			 */
-			/*
-			 * Simplificamos implementando EnviarAlumnosTask
-			 * 
-			Thread tareaPesada = new Thread(){
-				@Override
-				public void run() {
-					
-					// ----> Nos llevamos la tarea pesada a EnviaAlumnoTask
-					// Insertamos la tarea pesada
-					String urlServidor = 
-							"http://andrpod-mobile.joedayz.cludbees.net/alumnos";								
-					//cargamos los alumnos en "dao"
-					AlumnoDAO dao = new AlumnoDAO(ListaAlumnos.this); //context != this -> ListaAlumnos.this
-					List<Alumno> alumnos = dao.getLista();
-					dao.close();
-					
-					//implementaremos la clase AlumnoConverter con el metodo toJSON
-					//que reciba por parámetro la lista de alumnos
-					String datosJSON = new AlumnoConverter().toJSON(alumnos);
-					
-					// Recibiremos la respuesta del cliente de la clase WebClient
-					WebClient cliente = new WebClient(urlServidor);
-					final String respuestaJSON = cliente.post(datosJSON); //post de los datos JSON
-					
-					
-					// no se puede hacer un toast en el main desde un thread distinto					
-					//Toast.makeText(ListaAlumnos.this, respuestaJSON, Toast.LENGTH_LONG).show();
-					
-					
-					// --> Se incluye en el onPostExecute de EnviaAlumnoTask
-					// Entonces, por consola con LOG
-					Log.i("retorno de la llamada: ", respuestaJSON);
-					
-					ListaAlumnos.this.runOnUiThread(new Runnable() {						
-						@Override
-						public void run() {
-							Toast.makeText(ListaAlumnos.this, 
-									respuestaJSON, Toast.LENGTH_LONG)
-									.show();
-						}
-					});
-				}
-			};
-			tareaPesada.start(); // delegamos la tarea al Thread "tareaPesada"
-			*
-			*/
-			break;
-
-		default:
-			break;
+        
+			case R.id.nuevo:
+				Intent irFormulario = new Intent(this, Formulario.class);
+				startActivity(irFormulario);
+				break;
+				
+			case R.id.recibir_pruebas:
+				Intent irParaPruebas = new Intent(this, PruebasActivity.class);
+				startActivity(irParaPruebas);
+				break;
+				
+			case R.id.enviar_alumnos:
+				
+				EnviaAlumnosTask task = new EnviaAlumnosTask(this);
+				task.execute();
+				
+				/* Genera error si llamamos la tarea de un servicio desde el mismo hilo
+				 * de la interfaz de usuario (Network on main trheat exception), se sobre carga.
+				 * --> Solucion monse: crear un emulador anticucho
+				 * --> solucion normal, asigarlo a otro Thread
+				 */
+				/*
+				 * Simplificamos implementando EnviarAlumnosTask
+				 * 
+				Thread tareaPesada = new Thread(){
+					@Override
+					public void run() {
+						
+						// ----> Nos llevamos la tarea pesada a EnviaAlumnoTask
+						// Insertamos la tarea pesada
+						String urlServidor = 
+								"http://andrpod-mobile.joedayz.cludbees.net/alumnos";								
+						//cargamos los alumnos en "dao"
+						AlumnoDAO dao = new AlumnoDAO(ListaAlumnos.this); //context != this -> ListaAlumnos.this
+						List<Alumno> alumnos = dao.getLista();
+						dao.close();
+						
+						//implementaremos la clase AlumnoConverter con el metodo toJSON
+						//que reciba por parámetro la lista de alumnos
+						String datosJSON = new AlumnoConverter().toJSON(alumnos);
+						
+						// Recibiremos la respuesta del cliente de la clase WebClient
+						WebClient cliente = new WebClient(urlServidor);
+						final String respuestaJSON = cliente.post(datosJSON); //post de los datos JSON
+						
+						
+						// no se puede hacer un toast en el main desde un thread distinto					
+						//Toast.makeText(ListaAlumnos.this, respuestaJSON, Toast.LENGTH_LONG).show();
+						
+						
+						// --> Se incluye en el onPostExecute de EnviaAlumnoTask
+						// Entonces, por consola con LOG
+						Log.i("retorno de la llamada: ", respuestaJSON);
+						
+						ListaAlumnos.this.runOnUiThread(new Runnable() {						
+							@Override
+							public void run() {
+								Toast.makeText(ListaAlumnos.this, 
+										respuestaJSON, Toast.LENGTH_LONG)
+										.show();
+							}
+						});
+					}
+				};
+				tareaPesada.start(); // delegamos la tarea al Thread "tareaPesada"
+				*
+				*/
+				break;
+	
+			default:
+				break;
 		}
         return super.onOptionsItemSelected(item);
     }
