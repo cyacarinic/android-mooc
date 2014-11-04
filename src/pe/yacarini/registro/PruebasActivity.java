@@ -1,39 +1,37 @@
 package pe.yacarini.registro;
 
-import java.util.Arrays;
-import java.util.List;
-
-import pe.yacarini.registro.modelo.Prueba;
-import android.app.Activity;
+import fragment.DetallePruebaFragment;
+import fragment.ListaPruebaFragment;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 
-public class PruebasActivity extends Activity{
+public class PruebasActivity extends FragmentActivity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
 		
-		setContentView(R.layout.pruebas_lista);
+		setContentView(R.layout.pruebas);
 		
-		ListView listaDePruebas = (ListView)findViewById(R.id.pruebas);
+		FragmentManager manager = getSupportFragmentManager();
+		FragmentTransaction beginTransaction = manager.beginTransaction();
 		
-		Prueba prueba1 = new Prueba("16/11/1989","Piura");
-		prueba1.setTopicos(Arrays.asList("Spring MVC", "Spring JDBC",
-				"Spring JMS"));
+		if(isTabletEnHorizontal()){
+			beginTransaction.replace(R.id.pruebas_lista, new ListaPruebaFragment());
+			beginTransaction.replace(R.id.pruebas_detalle, new DetallePruebaFragment());
+		}else{
+			beginTransaction.replace(R.id.unico, new ListaPruebaFragment());
+		}
 		
-		Prueba prueba2 = new Prueba("10/01/1989","Lima");
-		prueba1.setTopicos(Arrays.asList("Fisioterapia", "Agentes",
-				"Reeducación"));
+		beginTransaction.commit();
 		
-		List<Prueba> pruebas = Arrays.asList(prueba1, prueba2);
-		
-		int layout = android.R.layout.simple_list_item_1;
-		ArrayAdapter<Prueba> adapter = new ArrayAdapter<Prueba>(this, 
-				layout, pruebas);
-		listaDePruebas.setAdapter(adapter);
-		
+	}
+
+	private boolean isTabletEnHorizontal() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 }

@@ -249,12 +249,7 @@ public class ListaAlumnos extends Activity {
 				Intent irFormulario = new Intent(this, Formulario.class);
 				startActivity(irFormulario);
 				break;
-				
-			case R.id.recibir_pruebas:
-				Intent irParaPruebas = new Intent(this, PruebasActivity.class);
-				startActivity(irParaPruebas);
-				break;
-				
+			
 			case R.id.enviar_alumnos:
 				
 				EnviaAlumnosTask task = new EnviaAlumnosTask(this);
@@ -312,6 +307,12 @@ public class ListaAlumnos extends Activity {
 				*
 				*/
 				break;
+				
+			case R.id.recibir_pruebas:
+				Intent irParaPruebas = new Intent(this, PruebasActivity.class);
+				startActivity(irParaPruebas);
+				break;
+				
 	
 			default:
 				break;
